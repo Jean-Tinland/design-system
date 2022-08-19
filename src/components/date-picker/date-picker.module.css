@@ -1,0 +1,77 @@
+.root {
+  width: min-content;
+  padding: 6px;
+  font-family: var(--ds-sans-serif-font, "Open Sans", inherit, sans-serif);
+  box-shadow: var(
+    --ds-date-picker-shadow,
+    var(--ds-shadow-200, 0 5px 10px rgba(0, 0, 0, 0.12))
+  );
+  background-color: var(--ds-grey-000, #fff);
+  border-radius: var(--ds-date-picker-radius, var(--ds-radius-200, 10px));
+}
+
+@media (min-width: 350px) {
+  .root {
+    padding: 14px;
+  }
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.control {
+  color: var(--ds-grey-600, #2d303c);
+  background-color: transparent;
+}
+
+.title {
+  margin: 0 auto;
+  color: var(--ds-grey-600, #2d303c);
+  background-color: transparent;
+}
+
+.control:not(:disabled):hover,
+.title:not(:disabled):hover {
+  background-color: var(--ds-grey-100, #f5f5f5);
+}
+
+.dates,
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(36px, 1fr));
+  gap: 3px;
+}
+
+@media (min-width: 350px) {
+  .dates,
+  .days {
+    grid-template-columns: repeat(7, minmax(40px, 1fr));
+  }
+}
+
+.days {
+  height: 34px;
+  align-items: center;
+  margin-bottom: 3px;
+  background-color: var(--ds-grey-100, #f5f5f5);
+  border-radius: var(--ds-radius-100, 3px);
+}
+
+.day {
+  color: var(--ds-grey-500, #484848);
+  font-size: 15px;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: color 160ms
+    var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@jt/design-system",
+  "version": "0.0.1",
+  "description": "Jean Tinland's design system (reusable components collection)",
+  "peerDependencies": {
+    "classnames": "^2.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "classnames": "^2.3.1",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "build": "babel ./src -x '.js' -d ./dist",
+    "postbuild": "cpx './src/**/*.css' ./dist",
+    "watch": "babel ./src -x '.js' -d ./dist -w & cpx './src/**/*.css' ./dist -w"
+  },
+  "files": [
+    "dist",
+    "button.js",
+    "checkbox.js",
+    "icons.js",
+    "input.js",
+    "multiple-select.js",
+    "number-picker.js",
+    "select.js",
+    "snackbar.js",
+    "textarea.js",
+    "tooltip.js"
+  ],
+  "browserslist": [
+    ">1%",
+    "not dead",
+    "ie >= 11",
+    "not op_mini all"
+  ]
+}

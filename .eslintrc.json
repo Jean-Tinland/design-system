@@ -1,0 +1,19 @@
+{
+  "plugins": ["jsx-a11y", "react", "react-hooks"],
+  "extends": [
+    "eslint:recommended",
+    "standard",
+    "plugin:react/jsx-runtime",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-console": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/display-name": "off",
+    "react/jsx-uses-react": 1,
+    "react/no-unescaped-entities": "off",
+    "react/prop-types": "off"
+  }
+}

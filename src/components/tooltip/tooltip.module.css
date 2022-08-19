@@ -1,0 +1,28 @@
+.root {
+  position: fixed;
+  padding: var(--ds-tooltip-padding, 6px 10px);
+  font-size: var(--ds-tooltip-font-size, 13px);
+  line-height: 1;
+  font-family: var(--ds-sans-serif-font, "Open Sans", inherit, sans-serif);
+  color: var(--ds-tooltip-foreground, var(--ds-grey-000, #fff));
+  background-color: var(--ds-tooltip-background, var(--ds-grey-500, #484848));
+  white-space: var(--ds-tooltip-white-space, nowrap);
+  border-radius: var(--ds-tooltip-radius, var(--ds-radius-200, 10px));
+  z-index: var(--ds-tooltip-z-index, 90);
+  opacity: var(--ds-tooltip-opacity, 0.9);
+  box-shadow: var(--ds-tooltip-shadow, none);
+  user-select: none;
+  pointer-events: none;
+  touch-action: none;
+  animation: show-tooltips 160ms
+    var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+@keyframes show-tooltips {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    transform: scale(0.7);
+  }
+}

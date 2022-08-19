@@ -1,0 +1,66 @@
+.picker {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: var(--ds-label-font-size, 12px);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 0;
+}
+
+.withInput .inner {
+  --ds-input-radius: 0;
+  --ds-input-compact-padding: 3px 5px;
+
+  align-items: stretch;
+  gap: 0;
+}
+
+.withInput .inner button {
+  position: relative;
+  z-index: 1;
+}
+
+.withInput .inner button:first-of-type {
+  --ds-button-radius: var(--ds-radius-100, 3px) 0 0 var(--ds-radius-100, 3px);
+}
+
+.withInput .inner button:last-of-type {
+  --ds-button-radius: 0 var(--ds-radius-100, 3px) var(--ds-radius-100, 3px) 0;
+}
+
+.withInput input {
+  text-align: center;
+}
+
+.value {
+  min-width: 18px;
+  font-size: var(--ds-number-picker-font-size, 14px);
+  text-transform: uppercase;
+  text-align: center;
+  user-select: none;
+}
+
+.picker.active .value {
+  position: relative;
+  color: var(--ds-number-picker-foreground, var(--ds-grey-600, #2d303c));
+  font-weight: 700;
+  text-align: center;
+  z-index: 0;
+}
+
+.picker.disabled .value {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

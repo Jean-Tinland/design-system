@@ -1,0 +1,49 @@
+.date {
+  width: 100%;
+  padding: 8px 6px;
+  font-size: 14px;
+  text-align: center;
+  background-color: transparent;
+  border: 0;
+  border-radius: var(--ds-radius-100, 3px);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: color 160ms
+      var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    background-color 160ms
+      var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    border-radius 160ms
+      var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.date:focus-visible {
+  outline: var(--ds-focus-ring-width, 2px) solid
+    var(--ds-focus-ring-color, var(--ds-blue-400, #4177f6));
+  outline-offset: var(--ds-focus-ring-offset, 2px);
+}
+
+.dateToday {
+  font-weight: 700;
+}
+
+.dateSelected {
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--ds-secondary, var(--ds-blue-400, #4177f6));
+}
+
+.dateDisabled,
+.dateDisabled.dateNotInMonth {
+  opacity: 0.25;
+  transform: translateZ(0);
+  cursor: not-allowed;
+}
+
+.dateNotInMonth {
+  opacity: 0.5;
+}
+
+.date:not(.dateDisabled):not(.dateSelected):hover {
+  background-color: var(--ds-grey-200, #efefef);
+}

@@ -1,0 +1,162 @@
+.input,
+.select,
+.textarea,
+.label {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--ds-sans-serif-font, "Open Sans", inherit, sans-serif);
+  gap: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.date .label {
+  position: relative;
+}
+
+.labelText {
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  padding: 0 3px;
+  color: var(--ds-grey-500, #484848);
+  font-size: var(--ds-label-font-size, 12px);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.error .labelText {
+  color: var(--ds-red-400, #f26464);
+}
+
+.field {
+  position: relative;
+  width: 100%;
+  padding: var(--ds-input-padding, 8px);
+  box-sizing: border-box;
+  color: var(--ds-input-foreground, var(--ds-grey-700, #171e30));
+  font-size: var(--ds-input-font-size, 16px);
+  font-family: var(--ds-sans-serif-font);
+  background-color: var(--ds-input-background, var(--ds-grey-100, #f5f5f5));
+  border: var(--ds-input-border, 0);
+  border-radius: var(--ds-input-radius, var(--ds-radius-100, 3px));
+  box-shadow: var(--ds-input-shadow, 0);
+  outline: none;
+}
+
+.field::placeholder {
+  opacity: 0.65;
+}
+
+.field:read-only {
+  cursor: default;
+}
+
+.field:disabled {
+  cursor: not-allowed;
+  filter: grayscale(100%) opacity(40%);
+}
+
+.dateField:focus,
+.field:focus-visible {
+  outline: var(--ds-focus-ring-width, 2px) solid
+    var(--ds-focus-ring-color, var(--ds-blue-400, #4177f6));
+  outline-offset: var(--ds-focus-ring-offset, 2px);
+}
+
+.select .field {
+  padding: var(--ds-input-padding, 8px)
+    calc(24px + var(--ds-input-padding, 8px)) var(--ds-input-padding, 8px)
+    var(--ds-input-padding, 8px);
+  appearance: none;
+  background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'%3E%3C/path%3E%3C/svg%3E");
+  background-position: calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 18px;
+}
+
+.textarea:not(.autoSizing) .field {
+  resize: vertical;
+}
+
+.textarea.autoSizing .field {
+  resize: none;
+}
+
+.input.compact .field,
+.select.compact .field,
+.textarea.compact .field {
+  font-size: 14px;
+}
+
+.select.compact .field {
+  padding: var(--ds-input-compact-padding, 5px)
+    calc(24px + var(--ds-input-compact-padding, 8px))
+    var(--ds-input-compact-padding, 5px) var(--ds-input-compact-padding, 5px);
+}
+
+.input.compact .field,
+.textarea.compact .field {
+  padding: var(--ds-input-compact-padding, 5px);
+}
+
+.dateField,
+.dateField:read-only {
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+}
+
+.datePicker {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 1;
+}
+
+.calendarIcon {
+  position: absolute;
+  top: calc(50% - 8px);
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.validIndicator,
+.errorIndicator {
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: input-validation-indicator-appearance 320ms
+    var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+@keyframes input-validation-indicator-appearance {
+  50% {
+    transform: scale(1.4);
+  }
+}
+
+.validIndicator {
+  fill: var(--ds-green-400, #4bde97);
+}
+
+.errorIndicator {
+  fill: var(--ds-red-400, #f26464);
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  padding: 0 3px;
+  color: var(--ds-red-400, #f26464);
+  font-style: italic;
+  font-size: 11px;
+}
