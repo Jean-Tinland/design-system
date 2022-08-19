@@ -1,1 +1,1 @@
-module.exports = require("./dist/components/number-picker");
+module.exports = require("./es/components/number-picker");

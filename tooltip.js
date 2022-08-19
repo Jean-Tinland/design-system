@@ -1,1 +1,1 @@
-module.exports = require("./dist/components/tooltip");
+module.exports = require("./es/components/tooltip");

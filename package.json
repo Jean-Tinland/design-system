@@ -13,8 +13,12 @@
     "@babel/plugin-proposal-class-properties": "^7.12.0",
     "@babel/preset-react": "^7.12.0",
     "@babel/preset-typescript": "^7.12.0",
+    "@types/css-modules": "^1.0.2",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
     "babel-loader": "^8.2.4",
     "classnames": "^2.3.1",
+    "concurrently": "^7.2.1",
     "cpx": "^1.5.0",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
@@ -26,16 +30,19 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-standard": "^5.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.7.2"
   },
   "scripts": {
-    "prepublishOnly": "yarn build",
-    "build": "babel ./src -x '.js' -d ./dist",
-    "postbuild": "cpx './src/**/*.css' ./dist",
-    "watch": "babel ./src -x '.js' -d ./dist -w & cpx './src/**/*.css' ./dist -w"
+    "clean": "rm -rf es",
+    "build": "babel src -x '.js,.ts,.tsx' -d es && tsc",
+    "postbuild": "cpx 'src/**/*.{json,css}' es",
+    "prepublishOnly": "yarn build"
   },
+  "packageManager": "yarn@1.22.18",
   "files": [
-    "dist",
+    "es",
     "button.js",
     "checkbox.js",
     "icons.js",

@@ -1,1 +1,1 @@
-module.exports = require("./dist/components/snackbar");
+module.exports = require("./es/components/snackbar");
