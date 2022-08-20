@@ -2,24 +2,31 @@ import * as React from "react";
 import classnames from "classnames";
 import css from "./checkbox.module.css";
 
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+  label?: string;
+  checked: boolean;
+  disabled?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onCheckedChange?: (value: boolean) => void;
+  children: React.ReactNode;
+};
+
 const Checkbox = ({
   label,
   className,
   onChange,
-  onValueChange,
-  value,
+  onCheckedChange,
+  checked,
   disabled,
   required,
-  inputProps,
-}) => {
-  const _onChange = (e) => {
+}: Props) => {
+  const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e);
-    onValueChange?.(e.target.value);
+    onCheckedChange?.(e.target.checked);
   };
 
-  const classes = classnames(css.field, {
+  const classes = classnames(css.field, className, {
     [css.disabled]: disabled,
-    [className]: className,
   });
 
   return (
@@ -28,10 +35,9 @@ const Checkbox = ({
         className={css.checkbox}
         onChange={_onChange}
         type="checkbox"
-        checked={value}
+        checked={checked}
         disabled={disabled}
         required={required}
-        {...inputProps}
       />
       <span className={css.checkmark} />
       <div className={css.label}>{label}</div>

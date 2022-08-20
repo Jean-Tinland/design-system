@@ -1,5 +1,4 @@
 import * as React from "react";
-import classnames from "classnames";
 import DatePicker from "../date-picker";
 import * as Icons from "../icons";
 import css from "./input.module.css";
@@ -7,33 +6,41 @@ import DateInputWrapper from "./date-input-wrapper";
 import Input from "./input";
 import * as Utils from "./utils";
 
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+  fieldRef?: HTMLInputElement | null;
+  min?: string;
+  max?: string;
+  placeholder?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onValueChange?: (value: string) => void;
+};
+
 const DateInput = ({
   fieldRef,
-  inputRef,
-  name,
   value,
+  min,
+  max,
+  placeholder = "JJ/MM/AAAA",
   onChange,
   onValueChange,
-  placeholder = "JJ/MM/AAAA",
-  inputProps,
-}) => {
-  const datePickerRef = React.useRef();
+  ...props
+}: Props) => {
+  const datePickerRef = React.useRef<HTMLElement>(null);
   const [datePickerVisible, setDatePickerVisible] = React.useState(false);
 
-  const ref = inputRef || React.createRef();
-
-  const _onChange = (value) => {
-    if (ref.current) {
-      Utils.triggerInputChange(ref.current, value);
+  const _onChange = (value: string) => {
+    if (fieldRef) {
+      Utils.triggerInputChange(fieldRef, value);
     }
   };
 
-  const closeOnOutsideClick = React.useCallback(
+  const closeOnOutsideClick: EventListener = React.useCallback(
     (e) => {
       if (datePickerVisible) {
+        const target = e.target as Element;
         if (
-          fieldRef.current?.contains(e.target) ||
-          datePickerRef.current?.contains(e.target)
+          fieldRef?.contains(target) ||
+          datePickerRef.current?.contains(target)
         ) {
           return;
         }
@@ -54,15 +61,13 @@ const DateInput = ({
   }, [closeOnOutsideClick]);
 
   const formatedValue =
-    value && value !== "undefined"
+    value && value !== "undefined" && typeof value === "string"
       ? new Date(value).toLocaleDateString("fr-FR")
       : placeholder;
 
   return (
     <>
       <Input
-        name={name}
-        inputRef={ref}
         type="text"
         value={value}
         onChange={onChange}
@@ -72,19 +77,20 @@ const DateInput = ({
       <Input
         type="text"
         className={css.dateField}
-        inputProps={{ onClick: toggleDatePicker }}
+        onClick={toggleDatePicker}
         value={formatedValue}
         readOnly
+        {...props}
       >
         <Icons.Calendar className={css.calendarIcon} />
       </Input>
       {datePickerVisible && (
-        <DateInputWrapper container={fieldRef?.current}>
+        <DateInputWrapper container={fieldRef}>
           <DatePicker
             ref={datePickerRef}
             className={css.datePicker}
-            min={inputProps?.min}
-            max={inputProps?.max}
+            min={min}
+            max={max}
             value={value}
             onChange={_onChange}
           />

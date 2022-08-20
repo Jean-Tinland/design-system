@@ -3,12 +3,18 @@ import classnames from "classnames";
 import * as Icons from "../icons";
 import css from "../input/input.module.css";
 
+type Props = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  label?: string;
+  valid?: boolean;
+  error?: boolean | string;
+  compact: boolean;
+  autoSizing: true;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onValueChange?: (value: string) => void;
+};
+
 const TextArea = ({
-  inputRef,
-  type = "text",
   label = "",
-  name,
-  placeholder,
   className,
   valid,
   error,
@@ -16,16 +22,12 @@ const TextArea = ({
   value,
   onChange,
   onValueChange,
-  autoFocus,
-  required,
   autoSizing,
-  disabled,
-  readOnly,
-  inputProps = {},
-}) => {
-  const innerRef = React.useRef();
+  ...props
+}: Props) => {
+  const innerRef = React.useRef<HTMLTextAreaElement | null>();
 
-  const _onChange = (e) => {
+  const _onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChange?.(e);
     onValueChange?.(e.target.value);
   };
@@ -34,16 +36,18 @@ const TextArea = ({
     const container = innerRef.current;
     if (!autoSizing || !container) return;
     const field = container.querySelector("textarea");
-    field.style.height = "inherit";
-    const computedStyle = window.getComputedStyle(field);
-    const paddingTop = parseInt(
-      computedStyle.getPropertyValue("padding-top") ?? 0
-    );
-    const paddingBottom = parseInt(
-      computedStyle.getPropertyValue("padding-bottom") ?? 0
-    );
-    const height = paddingTop + field.scrollHeight + paddingBottom;
-    field.style.height = `${height}px`;
+    if (field) {
+      field.style.height = "inherit";
+      const computedStyle = window.getComputedStyle(field);
+      const paddingTop = parseInt(
+        computedStyle.getPropertyValue("padding-top") ?? 0
+      );
+      const paddingBottom = parseInt(
+        computedStyle.getPropertyValue("padding-bottom") ?? 0
+      );
+      const height = paddingTop + field.scrollHeight + paddingBottom;
+      field.style.height = `${height}px`;
+    }
   }, [autoSizing]);
 
   React.useEffect(() => {
@@ -52,11 +56,9 @@ const TextArea = ({
 
   const isValid = valid && !error;
 
-  const classes = classnames(css.textarea, {
+  const classes = classnames(css.textarea, className, {
     [css.compact]: compact,
-    [css[type]]: type,
     [css.autoSizing]: autoSizing,
-    [className]: className,
     [css.valid]: isValid,
     [css.error]: error,
   });
@@ -70,23 +72,19 @@ const TextArea = ({
             {isValid && <Icons.Check className={css.validIndicator} />}
           </span>
         )}
-        <div ref={innerRef} className={css.inner}>
+        <div
+          // @ts-ignore
+          ref={innerRef}
+          className={css.inner}
+        >
           <textarea
-            ref={inputRef}
-            type={type}
-            name={name}
+            {...props}
             className={css.field}
             value={value}
             onChange={_onChange}
             onInput={updateTextAreaHeight}
             onFocus={updateTextAreaHeight}
-            placeholder={placeholder}
-            required={required}
-            autoFocus={autoFocus}
-            disabled={disabled}
-            readOnly={readOnly}
             aria-invalid={isValid !== undefined && !isValid}
-            {...inputProps}
           />
         </div>
       </label>

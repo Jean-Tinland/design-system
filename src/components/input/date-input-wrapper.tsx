@@ -2,7 +2,14 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import css from "./date-input-wrapper.module.css";
 
-const DateInputWrapper = ({ container, children }) => {
+type Props = {
+  container?: HTMLElement | null;
+  children: React.ReactNode;
+};
+
+const DateInputWrapper = ({ container, children }: Props) => {
+  if (!container) return null;
+
   const { scrollX, scrollY } = window;
   const { top: YOffset, left: XOffset } = document.body.getBoundingClientRect();
   const { top, left, height } = container.getBoundingClientRect();

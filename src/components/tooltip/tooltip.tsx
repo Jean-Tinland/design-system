@@ -4,18 +4,25 @@ import css from "./tooltip.module.css";
 
 const GAP = 4;
 
-const Tooltip = ({ anchor, children }) => {
-  const ref = React.useRef();
-  const [anchorBounds, setAnchorBounds] = React.useState();
+type Props = {
+  anchor?: Element;
+  children?: React.ReactNode;
+};
+
+const Tooltip = ({ anchor, children }: Props): React.ReactPortal | null => {
+  const ref = React.useRef<HTMLElement | null>();
+  const [anchorBounds, setAnchorBounds] = React.useState<DOMRect | undefined>();
   const [styles, setStyles] = React.useState({});
 
   React.useEffect(() => {
-    const bounds = anchor.getBoundingClientRect();
-    setAnchorBounds(bounds);
+    if (anchor) {
+      const bounds = anchor.getBoundingClientRect();
+      setAnchorBounds(bounds);
+    }
   }, [anchor]);
 
   React.useEffect(() => {
-    if (anchorBounds) {
+    if (anchorBounds && ref.current) {
       const { width, height } = ref.current.getBoundingClientRect();
       const defaultY = anchorBounds.y + anchorBounds.height + GAP;
       const defaultX = anchorBounds.x + anchorBounds.width / 2 - width / 2;
@@ -46,7 +53,12 @@ const Tooltip = ({ anchor, children }) => {
   if (!anchorBounds) return null;
 
   return ReactDOM.createPortal(
-    <div ref={ref} className={css.root} style={styles}>
+    <div
+      // @ts-ignore
+      ref={ref}
+      className={css.root}
+      style={styles}
+    >
       {children}
     </div>,
     document.body

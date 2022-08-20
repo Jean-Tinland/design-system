@@ -1,3 +1,4 @@
+/* eslint-disable no-proto */
 export const triggerInputChange = (node, value) => {
   const inputTypes = [
     window.HTMLInputElement,

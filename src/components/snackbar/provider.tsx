@@ -1,10 +1,25 @@
 import * as React from "react";
 import Snackbar from "./snackbar";
 
+type Timeout = ReturnType<typeof setTimeout>;
+
+type Props = {
+  children: React.ReactNode;
+};
+
+type SnackbarProps = {
+  type?: "success" | "error" | "warning" | "information";
+  showIcon?: boolean;
+  delay?: number;
+  message?: string;
+  filler?: boolean;
+  showCloseButton?: boolean;
+};
+
 const CLOSING_DELAY = 320;
 const DEFAULT_DELAY = 4500;
 
-const SnackbarContext = React.createContext();
+const SnackbarContext = React.createContext({});
 
 export const useSnackbar = () => {
   const context = React.useContext(SnackbarContext);
@@ -17,14 +32,18 @@ const getUniqueId = () => {
   return Math.floor((1 + Math.random()) * 0x10000);
 };
 
-const SnackbarProvider = (props) => {
-  const [uniqueId, setUniqueId] = React.useState();
-  const [snackbar, setSnackbar] = React.useState();
+const SnackbarProvider = ({ children }: Props): JSX.Element => {
+  const [uniqueId, setUniqueId] = React.useState<number | undefined>();
+  const [snackbar, setSnackbar] = React.useState<SnackbarProps | undefined>();
   const [closing, setClosing] = React.useState(false);
-  const [visibilityTimeout, setVisibilityTimeout] = React.useState();
+  const [visibilityTimeout, setVisibilityTimeout] = React.useState<
+    Timeout | undefined
+  >();
   const [delayedVisibilityTimeout, setDelayedVisibilityTimeout] =
-    React.useState();
-  const [closingTimeout, setClosingTimeout] = React.useState();
+    React.useState<Timeout | undefined>();
+  const [closingTimeout, setClosingTimeout] = React.useState<
+    Timeout | undefined
+  >();
 
   const delay = snackbar?.delay || DEFAULT_DELAY;
 
@@ -71,8 +90,8 @@ const SnackbarProvider = (props) => {
   };
 
   return (
-    <SnackbarContext.Provider value={{ show, hide }} {...props}>
-      {props.children}
+    <SnackbarContext.Provider value={{ show, hide }}>
+      {children}
       {snackbar && (
         <Snackbar key={uniqueId} {...snackbar} closing={closing} close={hide} />
       )}

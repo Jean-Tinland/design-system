@@ -4,48 +4,57 @@ import * as Icons from "../icons";
 import DateInput from "./date-input";
 import css from "./input.module.css";
 
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+  label?: string;
+  valid?: boolean;
+  error?: boolean | string;
+  compact?: boolean;
+  autoSizing?: true;
+  min?: string;
+  max?: string;
+  onValueChange?: (value: string) => void;
+  hidden?: boolean;
+};
+
 const Input = ({
-  inputRef,
   type = "text",
   label = "",
-  name,
-  placeholder,
   className,
   valid,
   error,
   compact,
   value,
-  autoFocus,
-  required,
-  disabled,
-  readOnly,
+  hidden,
+  min,
+  max,
   onChange,
   onValueChange,
-  inputProps = {},
-  children,
-  hidden,
-}) => {
-  const ref = React.useRef();
+  ...props
+}: Props) => {
+  const ref = React.useRef<HTMLInputElement>(null);
 
   const isDate = type === "date";
   const isValid = valid && !error;
 
-  const _onChange = (e) => {
+  const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e);
     onValueChange?.(e.target.value);
   };
 
-  const classes = classnames(css.input, {
+  const classes = classnames(css.input, className, {
     [css.hidden]: hidden,
     [css.compact]: compact,
     [css.date]: isDate,
-    [className]: className,
     [css.valid]: isValid,
     [css.error]: error,
   });
 
   return (
-    <div ref={ref} className={classes}>
+    <div
+      // @ts-ignore
+      ref={ref}
+      className={classes}
+    >
       <label className={css.label}>
         {(label || (isValid && !error)) && (
           <span className={css.labelText}>
@@ -56,34 +65,17 @@ const Input = ({
           </span>
         )}
         {isDate ? (
-          <DateInput
-            name={name}
-            value={value}
-            onChange={onChange}
-            onValueChange={onValueChange}
-            placeholder={placeholder}
-            fieldRef={ref}
-            inputRef={inputRef}
-            inputProps={inputProps}
-          />
+          <DateInput fieldRef={ref?.current} min={min} max={max} {...props} />
         ) : (
           <input
-            ref={inputRef}
             type={type}
-            name={name}
             className={css.field}
             value={value}
             onChange={_onChange}
-            placeholder={placeholder}
-            required={required}
-            autoFocus={autoFocus}
-            disabled={disabled}
-            readOnly={readOnly}
             aria-invalid={isValid !== undefined && !isValid}
-            {...inputProps}
+            {...props}
           />
         )}
-        {children}
       </label>
       {error && (
         <div className={css.errorMessage} role="alert">
