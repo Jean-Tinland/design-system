@@ -1,5 +1,5 @@
 {
-  "name": "@jt/design-system",
+  "name": "jt-design-system",
   "version": "0.0.1",
   "description": "Jean Tinland's design system (reusable components collection)",
   "peerDependencies": {
