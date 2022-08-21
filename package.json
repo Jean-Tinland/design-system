@@ -1,6 +1,6 @@
 {
   "name": "jt-design-system",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Jean Tinland's design system (reusable components collection)",
   "peerDependencies": {
     "classnames": "^2.3.1",
