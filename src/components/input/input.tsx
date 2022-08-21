@@ -6,7 +6,7 @@ import css from "./input.module.css";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
-  icon?: string | React.FC;
+  icon?: keyof typeof Icons | React.FC;
   valid?: boolean;
   error?: boolean | string;
   compact?: boolean;
