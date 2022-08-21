@@ -37,7 +37,6 @@
 
 .fieldWrapper {
   position: relative;
-  width: 100%;
 }
 
 .fieldWrapper > svg {
@@ -50,6 +49,7 @@
 }
 
 .field {
+  width: 100%;
   padding: var(--ds-input-padding, 8px);
   box-sizing: border-box;
   color: var(--ds-input-foreground, var(--ds-grey-700, #171e30));
