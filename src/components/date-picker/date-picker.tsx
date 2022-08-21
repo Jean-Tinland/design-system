@@ -8,6 +8,17 @@ import * as Utils from "./utils";
 import css from "./date-picker.module.css";
 import Menu from "./menu";
 
+type Props = {
+  lang?: string;
+  className?: string;
+  min?: string;
+  max?: string;
+  value?: string;
+  onChange: (value: string) => void;
+  defaultMonth: number;
+  defaultYear: number;
+};
+
 const DatePicker = React.forwardRef(
   (
     {
@@ -19,7 +30,7 @@ const DatePicker = React.forwardRef(
       onChange,
       defaultMonth,
       defaultYear,
-    },
+    }: Props,
     ref
   ) => {
     const locale =
@@ -32,9 +43,9 @@ const DatePicker = React.forwardRef(
     const dateYear = date && date.getFullYear();
 
     const minDate = min && new Date(min);
-    minDate?.setHours(0, 0, 0, 0);
+    if (minDate) minDate.setHours(0, 0, 0, 0);
     const maxDate = max && new Date(max);
-    maxDate?.setHours(0, 0, 0, 0);
+    if (maxDate) maxDate.setHours(0, 0, 0, 0);
 
     const currentMonth = now.getMonth() + 1;
     const currentYear = now.getFullYear();
@@ -89,34 +100,37 @@ const DatePicker = React.forwardRef(
       setMenuOpened(!menuOpened);
     };
 
-    const classes = classnames(css.root, {
-      [className]: className,
-    });
+    const classes = classnames(css.root, className);
 
     return (
-      <div ref={ref} className={classes}>
+      <div
+        // @ts-ignore
+        ref={ref}
+        className={classes}
+      >
         <div className={css.inner}>
           <div className={css.header}>
             <Button
               className={css.control}
-              StartIcon={Icons.ChevronLeft}
               onClick={gotoPreviousMonth}
-              disabled={pastMonthDisabled}
-            />
+              disabled={!!pastMonthDisabled}
+            >
+              <Icons.ChevronLeft />
+            </Button>
             <Button
               className={css.title}
-              EndIcon={Icons.ChevronDown}
               onClick={toggleMenu}
-              disabled={yearSelectLocked}
+              disabled={!!yearSelectLocked}
             >
-              {monthName} {year}
+              {monthName} {year} <Icons.ChevronDown />
             </Button>
             <Button
               className={css.control}
-              StartIcon={Icons.ChevronRight}
               onClick={gotoNextMonth}
-              disabled={futureMonthDisabled}
-            />
+              disabled={!!futureMonthDisabled}
+            >
+              <Icons.ChevronRight />
+            </Button>
           </div>
           <div className={css.days}>
             {days.map((day, i) => (

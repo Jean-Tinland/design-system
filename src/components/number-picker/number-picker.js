@@ -62,30 +62,32 @@ const NumberPicker = ({
       <div className={css.inner}>
         <Button
           onClick={subtract(value, min, max, onChange)}
-          StartIcon={Icons.Minus}
           disabled={isBelow(value, min, disabled)}
           aria-label="Minus"
           compact
-        />
+        >
+          <Icons.Minus />
+        </Button>
         {withInput ? (
           <Input
             type="text"
             value={value}
-            onChange={update(min, max, onChange)}
+            onValueChange={update(min, max, onChange)}
             className={css.value}
             compact
-            inputProps={{ size: inputSize }}
+            size={inputSize}
           />
         ) : (
           <span className={css.value}>{value}</span>
         )}
         <Button
           onClick={add(value, min, max, onChange)}
-          StartIcon={Icons.Plus}
           disabled={isAbove(value, max, disabled)}
           aria-label="Plus"
           compact
-        />
+        >
+          <Icons.Plus />
+        </Button>
       </div>
     </div>
   );

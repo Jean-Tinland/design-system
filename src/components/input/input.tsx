@@ -6,27 +6,24 @@ import css from "./input.module.css";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
+  icon?: string | React.FC;
   valid?: boolean;
   error?: boolean | string;
   compact?: boolean;
-  autoSizing?: true;
-  min?: string;
-  max?: string;
-  onValueChange?: (value: string) => void;
   hidden?: boolean;
+  onValueChange?: (value: string) => void;
 };
 
 const Input = ({
   type = "text",
   label = "",
+  icon,
   className,
   valid,
   error,
   compact,
-  value,
   hidden,
-  min,
-  max,
+  value,
   onChange,
   onValueChange,
   ...props
@@ -41,7 +38,14 @@ const Input = ({
     onValueChange?.(e.target.value);
   };
 
+  const Icon = icon
+    ? typeof icon === "string"
+      ? Icons[icon] || null
+      : icon
+    : null;
+
   const classes = classnames(css.input, className, {
+    [css.withIcon]: !!Icon,
     [css.hidden]: hidden,
     [css.compact]: compact,
     [css.date]: isDate,
@@ -65,16 +69,19 @@ const Input = ({
           </span>
         )}
         {isDate ? (
-          <DateInput fieldRef={ref?.current} min={min} max={max} {...props} />
+          <DateInput fieldRef={ref} {...props} />
         ) : (
-          <input
-            type={type}
-            className={css.field}
-            value={value}
-            onChange={_onChange}
-            aria-invalid={isValid !== undefined && !isValid}
-            {...props}
-          />
+          <div className={css.fieldWrapper}>
+            {Icon && <Icon />}
+            <input
+              type={type}
+              className={css.field}
+              value={value}
+              onChange={_onChange}
+              aria-invalid={isValid !== undefined && !isValid}
+              {...props}
+            />
+          </div>
         )}
       </label>
       {error && (

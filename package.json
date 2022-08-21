@@ -38,7 +38,8 @@
     "clean": "rm -rf es",
     "build": "babel src -x '.js,.ts,.tsx' -d es && tsc",
     "postbuild": "cpx 'src/**/*.{json,css}' es",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn clean && yarn build",
+    "watch": "yarn clean && babel ./src -x '.js,.ts,.tsx' -d ./es -w & cpx 'src/**/*.{json,css}' ./es -w"
   },
   "packageManager": "yarn@1.22.18",
   "files": [

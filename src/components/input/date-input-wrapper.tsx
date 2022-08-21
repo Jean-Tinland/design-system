@@ -3,16 +3,16 @@ import * as ReactDOM from "react-dom";
 import css from "./date-input-wrapper.module.css";
 
 type Props = {
-  container?: HTMLElement | null;
+  fieldRef: React.RefObject<HTMLElement>;
   children: React.ReactNode;
 };
 
-const DateInputWrapper = ({ container, children }: Props) => {
-  if (!container) return null;
+const DateInputWrapper = ({ fieldRef, children }: Props) => {
+  if (!fieldRef.current) return null;
 
   const { scrollX, scrollY } = window;
   const { top: YOffset, left: XOffset } = document.body.getBoundingClientRect();
-  const { top, left, height } = container.getBoundingClientRect();
+  const { top, left, height } = fieldRef.current.getBoundingClientRect();
 
   const containerBottom = top + height + scrollY;
   const containerLeft = left + scrollX;

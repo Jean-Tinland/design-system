@@ -18,7 +18,7 @@
   line-height: var(--ds-button-line-height, 1);
   font-weight: var(--ds-button-font-weight, 700);
   border: var(--ds-button-border, 0);
-  border-radius: var(--ds-button-radius, var(--ds-radius-100, 3px));
+  border-radius: var(--ds-button-radius, var(--ds-radius-100, 6px));
   box-shadow: var(--ds-button-shadow, 0);
   cursor: pointer;
   transition: background-color 160ms
@@ -51,7 +51,7 @@
   --padding: var(--ds-button-compact-padding, 5px);
 }
 
-.icon {
+.button > svg {
   --size: 17px;
   flex: 0 0 var(--size);
   width: var(--size);
@@ -59,6 +59,6 @@
   fill: currentColor;
 }
 
-.compact .icon {
+.compact > svg {
   --size: 12px;
 }

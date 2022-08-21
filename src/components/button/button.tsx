@@ -15,6 +15,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
   ({ tag = "button", className, compact, children, ...props }, ref) => {
     const classes = classnames(css.button, className, {
       [css.compact]: compact,
+      [css.iconOnly]: typeof children === "object",
     });
 
     return (

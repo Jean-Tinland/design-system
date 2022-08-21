@@ -8,6 +8,10 @@
   gap: 5px;
 }
 
+.withIcon {
+  --icon-size: 16px;
+}
+
 .hidden {
   display: none;
 }
@@ -31,9 +35,21 @@
   color: var(--ds-red-400, #f26464);
 }
 
-.field {
+.fieldWrapper {
   position: relative;
   width: 100%;
+}
+
+.fieldWrapper > svg {
+  position: absolute;
+  top: calc(50% - var(--icon-size) / 2);
+  left: var(--ds-input-padding, 8px);
+  width: var(--icon-size);
+  height: var(--icon-size);
+  fill: currentColor;
+}
+
+.field {
   padding: var(--ds-input-padding, 8px);
   box-sizing: border-box;
   color: var(--ds-input-foreground, var(--ds-grey-700, #171e30));
@@ -41,9 +57,13 @@
   font-family: var(--ds-sans-serif-font);
   background-color: var(--ds-input-background, var(--ds-grey-100, #f5f5f5));
   border: var(--ds-input-border, 0);
-  border-radius: var(--ds-input-radius, var(--ds-radius-100, 3px));
+  border-radius: var(--ds-input-radius, var(--ds-radius-100, 6px));
   box-shadow: var(--ds-input-shadow, 0);
   outline: none;
+}
+
+.withIcon .field {
+  padding-left: calc(var(--icon-size) + var(--ds-input-padding, 8px) * 2);
 }
 
 .field::placeholder {

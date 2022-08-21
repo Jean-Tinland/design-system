@@ -1,15 +1,12 @@
 import * as React from "react";
 import DatePicker from "../date-picker";
-import * as Icons from "../icons";
 import css from "./input.module.css";
 import DateInputWrapper from "./date-input-wrapper";
 import Input from "./input";
 import * as Utils from "./utils";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
-  fieldRef?: HTMLInputElement | null;
-  min?: string;
-  max?: string;
+  fieldRef: React.RefObject<HTMLInputElement>;
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onValueChange?: (value: string) => void;
@@ -39,7 +36,7 @@ const DateInput = ({
       if (datePickerVisible) {
         const target = e.target as Element;
         if (
-          fieldRef?.contains(target) ||
+          fieldRef.current?.contains(target) ||
           datePickerRef.current?.contains(target)
         ) {
           return;
@@ -76,16 +73,15 @@ const DateInput = ({
       />
       <Input
         type="text"
+        icon="Calendar"
         className={css.dateField}
         onClick={toggleDatePicker}
         value={formatedValue}
         readOnly
         {...props}
-      >
-        <Icons.Calendar className={css.calendarIcon} />
-      </Input>
+      />
       {datePickerVisible && (
-        <DateInputWrapper container={fieldRef}>
+        <DateInputWrapper fieldRef={fieldRef}>
           <DatePicker
             ref={datePickerRef}
             className={css.datePicker}

@@ -18,12 +18,13 @@ const Menu = ({
   setMonth,
   setYear,
 }) => {
-  const ref = React.useRef();
+  const ref = React.useRef<HTMLElement>(null);
   const minYear = minDate?.getFullYear() || currentYear - 122;
   const maxYear = maxDate?.getFullYear() || currentYear + 122;
   const yearRange = Utils.getYearsRange(minYear, maxYear);
   const [selectedYear, setSelectedYear] = React.useState(year);
-  const [scrollBehavior, setScrollBehavior] = React.useState("instant");
+  const [scrollBehavior, setScrollBehavior] =
+    React.useState<ScrollBehavior>("auto");
 
   const months = Data.SHORT_MONTHS[lang];
 
@@ -70,26 +71,24 @@ const Menu = ({
   return (
     <div className={classes}>
       <div className={css.controls}>
-        <Button
-          className={css.control}
-          StartIcon={Icons.ChevronUp}
-          onClick={selectPreviousYear}
-        />
-        <Button
-          className={css.control}
-          StartIcon={Icons.ChevronDown}
-          onClick={selectNextYear}
-        />
-        <Button
-          className={css.close}
-          StartIcon={Icons.Cross}
-          onClick={toggleMenu}
-        />
+        <Button className={css.control} onClick={selectPreviousYear}>
+          <Icons.ChevronUp />
+        </Button>
+        <Button className={css.control} onClick={selectNextYear}>
+          <Icons.ChevronDown />
+        </Button>
+        <Button className={css.close} onClick={toggleMenu}>
+          <Icons.Cross />
+        </Button>
       </div>
       <div className={css.bottom}>
         <div className={css.years}>
-          <div ref={ref} className={css.yearsInner}>
-            {yearRange.map((year) => {
+          <div
+            // @ts-ignore
+            ref={ref}
+            className={css.yearsInner}
+          >
+            {yearRange.map((year: number) => {
               const classes = classnames(css.year, {
                 [css.yearSelected]: year === selectedYear,
               });

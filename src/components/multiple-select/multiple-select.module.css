@@ -51,17 +51,17 @@
   width: 6px;
   height: 6px;
   background-color: var(--ds-grey-200, #efefef);
-  border-radius: var(--ds-radius-100, 3px);
+  border-radius: var(--ds-radius-100, 6px);
 }
 
 .dropdownInner::-webkit-scrollbar-track {
   background-color: var(--ds-grey-200, #efefef);
-  border-radius: var(--ds-radius-100, 3px);
+  border-radius: var(--ds-radius-100, 6px);
 }
 
 .dropdownInner::-webkit-scrollbar-thumb {
   background-color: var(--ds-secondary, var(--ds-blue-400, #4177f6));
-  border-radius: var(--ds-radius-100, 3px);
+  border-radius: var(--ds-radius-100, 6px);
 }
 
 .option {
@@ -71,7 +71,7 @@
   padding: 6px;
   background-color: transparent;
   border: 0;
-  border-radius: var(--ds-radius-100, 3px);
+  border-radius: var(--ds-radius-100, 6px);
   text-align: left;
   transition: background-color 160ms
     var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));

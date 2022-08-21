@@ -37,7 +37,7 @@
   background-color: var(--ds-input-background, var(--ds-grey-100, #f5f5f5));
   border: 0;
   box-sizing: content-box;
-  border-radius: var(--ds-input-radius, var(--ds-radius-100, 3px));
+  border-radius: var(--ds-input-radius, var(--ds-radius-100, 6px));
   transform-origin: center;
   transition: background-color 160ms
     var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));
@@ -59,7 +59,7 @@
     --ds-checkbox-foreground,
     var(--ds-secondary, var(--ds-blue-400, #4177f6))
   );
-  border-radius: var(--ds-input-radius, var(--ds-radius-100, 3px));
+  border-radius: var(--ds-input-radius, var(--ds-radius-100, 6px));
   transform-origin: 0% 0%;
 }
 

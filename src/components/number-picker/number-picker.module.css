@@ -33,11 +33,11 @@
 }
 
 .withInput .inner button:first-of-type {
-  --ds-button-radius: var(--ds-radius-100, 3px) 0 0 var(--ds-radius-100, 3px);
+  --ds-button-radius: var(--ds-radius-100, 6px) 0 0 var(--ds-radius-100, 6px);
 }
 
 .withInput .inner button:last-of-type {
-  --ds-button-radius: 0 var(--ds-radius-100, 3px) var(--ds-radius-100, 3px) 0;
+  --ds-button-radius: 0 var(--ds-radius-100, 6px) var(--ds-radius-100, 6px) 0;
 }
 
 .withInput input {
