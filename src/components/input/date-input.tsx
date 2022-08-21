@@ -25,6 +25,8 @@ const DateInput = ({
   const datePickerRef = React.useRef<HTMLElement>(null);
   const [datePickerVisible, setDatePickerVisible] = React.useState(false);
 
+  const dateValue = value && value !== "undefined" && new Date(value as string);
+
   const _onChange = (value: string) => {
     if (fieldRef) {
       Utils.triggerInputChange(fieldRef, value);
@@ -57,10 +59,9 @@ const DateInput = ({
       document.body.removeEventListener("click", closeOnOutsideClick);
   }, [closeOnOutsideClick]);
 
-  const formatedValue =
-    value && value !== "undefined" && typeof value === "string"
-      ? new Date(value).toLocaleDateString("fr-FR")
-      : placeholder;
+  const formatedValue = dateValue
+    ? dateValue.toLocaleDateString("fr-FR")
+    : placeholder;
 
   return (
     <>

@@ -11,12 +11,12 @@ import Menu from "./menu";
 type Props = {
   lang?: string;
   className?: string;
-  min?: string;
-  max?: string;
-  value: string;
+  min?: number | string;
+  max?: number | string;
+  value?: string | number | readonly string[];
   onChange: (value: string) => void;
-  defaultMonth: number;
-  defaultYear: number;
+  defaultMonth?: number;
+  defaultYear?: number;
 };
 
 const DatePicker = React.forwardRef(
@@ -38,7 +38,7 @@ const DatePicker = React.forwardRef(
         ? "fr"
         : "en";
     const now = new Date();
-    const date = value && new Date(value);
+    const date = value && new Date(value as string);
     const dateMonth = date && date.getMonth() + 1;
     const dateYear = date && date.getFullYear();
 
