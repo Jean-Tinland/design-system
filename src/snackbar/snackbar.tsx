@@ -60,6 +60,4 @@ const Snackbar = ({
   );
 };
 
-export { default as SnackbarProvider, useSnackbar } from "./provider";
-
 export default Snackbar;
