@@ -13,7 +13,7 @@ type Props = {
   className?: string;
   min?: string;
   max?: string;
-  value?: string;
+  value: string;
   onChange: (value: string) => void;
   defaultMonth: number;
   defaultYear: number;
