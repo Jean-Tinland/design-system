@@ -1,6 +1,6 @@
 import * as React from "react";
 import classnames from "classnames";
-import Button from "../button";
+import Button from "../button/button";
 import * as Icons from "../icons";
 import * as Utils from "./utils";
 import * as Data from "./data";

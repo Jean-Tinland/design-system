@@ -1,1 +1,1 @@
-module.exports = require("./es/components/select");
+module.exports = require("./es/components/select/select");

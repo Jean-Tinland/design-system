@@ -1,1 +1,1 @@
-module.exports = require("./es/components/multiple-select");
+module.exports = require("./es/components/multiple-select/multiple-select");

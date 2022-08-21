@@ -1,5 +1,5 @@
 import * as React from "react";
-import DatePicker from "../date-picker";
+import DatePicker from "../date-picker/date-picker";
 import css from "./input.module.css";
 import DateInputWrapper from "./date-input-wrapper";
 import Input from "./input";

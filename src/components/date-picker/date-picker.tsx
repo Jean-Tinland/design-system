@@ -1,7 +1,7 @@
 import * as React from "react";
 import classnames from "classnames";
 import DateItem from "./date-item";
-import Button from "../button";
+import Button from "../button/button";
 import * as Icons from "../icons";
 import * as Data from "./data";
 import * as Utils from "./utils";

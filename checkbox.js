@@ -1,1 +1,1 @@
-module.exports = require("./es/components/checkbox");
+module.exports = require("./es/components/checkbox/checkbox");

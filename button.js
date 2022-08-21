@@ -1,1 +1,1 @@
-module.exports = require("./es/components/button");
+module.exports = require("./es/components/button/button");

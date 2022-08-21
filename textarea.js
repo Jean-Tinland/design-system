@@ -1,1 +1,1 @@
-module.exports = require("./es/components/textarea");
+module.exports = require("./es/components/textarea/textarea");
