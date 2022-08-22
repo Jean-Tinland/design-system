@@ -62,10 +62,6 @@
   outline: none;
 }
 
-.withIcon .field {
-  padding-left: calc(var(--icon-size) + var(--ds-input-padding, 8px) * 2);
-}
-
 .field::placeholder {
   opacity: 0.65;
 }
@@ -95,6 +91,10 @@
   background-position: calc(100% - 10px) 50%;
   background-repeat: no-repeat;
   background-size: 18px;
+}
+
+.withIcon .field {
+  padding-left: calc(var(--icon-size) + var(--ds-input-padding, 8px) * 2);
 }
 
 .textarea:not(.autoSizing) .field {

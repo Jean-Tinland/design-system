@@ -7,6 +7,7 @@ import * as Utils from "./utils";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   fieldRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement>;
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onValueChange?: (value: string) => void;
@@ -14,6 +15,7 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
 
 const DateInput = ({
   fieldRef,
+  inputRef,
   value,
   min,
   max,
@@ -28,8 +30,8 @@ const DateInput = ({
   const dateValue = value && value !== "undefined" && new Date(value as string);
 
   const _onChange = (value: string) => {
-    if (fieldRef) {
-      Utils.triggerInputChange(fieldRef, value);
+    if (inputRef.current) {
+      Utils.triggerInputChange(inputRef.current, value);
     }
   };
 
@@ -65,12 +67,12 @@ const DateInput = ({
 
   return (
     <>
-      <Input
+      <input
+        className={css.hidden}
+        ref={inputRef}
         type="text"
         value={value}
         onChange={onChange}
-        onValueChange={onValueChange}
-        hidden
       />
       <Input
         type="text"
@@ -80,6 +82,7 @@ const DateInput = ({
         value={formatedValue}
         readOnly
         {...props}
+        onChange={undefined}
       />
       {datePickerVisible && (
         <DateInputWrapper fieldRef={fieldRef}>

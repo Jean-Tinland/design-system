@@ -4,7 +4,6 @@ import css from "./date-item.module.css";
 import * as Utils from "./utils";
 
 const DateItem = ({ date, month, year, value, onChange, minDate, maxDate }) => {
-  console.log(css);
   const dateString = date.join("-");
   const _date = new Date(dateString);
   _date.setHours(0, 0, 0, 0);

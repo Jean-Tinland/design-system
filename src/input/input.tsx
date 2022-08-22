@@ -10,7 +10,6 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   valid?: boolean;
   error?: boolean | string;
   compact?: boolean;
-  hidden?: boolean;
   onValueChange?: (value: string) => void;
 };
 
@@ -22,13 +21,13 @@ const Input = ({
   valid,
   error,
   compact,
-  hidden,
   value,
   onChange,
   onValueChange,
   ...props
 }: Props) => {
   const ref = React.useRef<HTMLInputElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const isDate = type === "date";
   const isValid = valid && !error;
@@ -46,7 +45,6 @@ const Input = ({
 
   const classes = classnames(css.input, className, {
     [css.withIcon]: !!Icon,
-    [css.hidden]: hidden,
     [css.compact]: compact,
     [css.date]: isDate,
     [css.valid]: isValid,
@@ -69,11 +67,19 @@ const Input = ({
           </span>
         )}
         {isDate ? (
-          <DateInput fieldRef={ref} {...props} />
+          <DateInput
+            fieldRef={ref}
+            inputRef={inputRef}
+            onChange={_onChange}
+            value={value}
+            {...props}
+          />
         ) : (
           <div className={css.fieldWrapper}>
             {Icon && <Icon />}
             <input
+              // @ts-ignore
+              ref={inputRef}
               type={type}
               className={css.field}
               value={value}
