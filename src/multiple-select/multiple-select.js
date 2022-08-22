@@ -124,8 +124,6 @@ const MultipleSelect = ({
               [css.optionSelected]: isSelected,
             });
 
-            const inputProps = { tabIndex: opened ? 0 : -1 };
-
             return (
               <div key={value} role="listitem">
                 <Checkbox
@@ -133,8 +131,8 @@ const MultipleSelect = ({
                   label={label}
                   value={isSelected}
                   onChange={_onChange(option)}
-                  inputProps={inputProps}
                   disabled={disabled}
+                  tabIndex={opened ? 0 : -1}
                 />
               </div>
             );

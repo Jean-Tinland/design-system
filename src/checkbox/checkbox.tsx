@@ -19,6 +19,7 @@ const Checkbox = ({
   checked,
   disabled,
   required,
+  ...props
 }: Props) => {
   const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e);
@@ -38,6 +39,7 @@ const Checkbox = ({
         checked={checked}
         disabled={disabled}
         required={required}
+        {...props}
       />
       <span className={css.checkmark} />
       <div className={css.label}>{label}</div>
