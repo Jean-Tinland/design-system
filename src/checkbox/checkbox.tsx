@@ -8,7 +8,6 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onCheckedChange?: (value: boolean) => void;
-  children: React.ReactNode;
 };
 
 const Checkbox = ({
