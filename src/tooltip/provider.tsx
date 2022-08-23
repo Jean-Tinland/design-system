@@ -33,17 +33,24 @@ const TooltipProvider = ({ children }: Props): JSX.Element => {
     setTooltip(undefined);
   };
 
-  React.useEffect(() => {
-    const targets = Array.from(document.querySelectorAll(`[${ATTRIBUTE}]`));
-    targets.forEach((target) => {
-      target.addEventListener("mouseenter", show);
-      target.addEventListener("mouseleave", hide);
+  const hover: EventListener = (e) => {
+    requestAnimationFrame(() => {
+      const target = e.target as Element;
+      if (target) {
+        const hoveredTooltip = target.closest(`[${ATTRIBUTE}]`);
+        if (hoveredTooltip) {
+          show(e);
+        } else {
+          hide();
+        }
+      }
     });
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("mouseover", hover);
     return () => {
-      targets.forEach((target) => {
-        target.removeEventListener("mouseenter", show);
-        target.removeEventListener("mouseleave", hide);
-      });
+      window.removeEventListener("mouseover", hover);
     };
   }, []);
 

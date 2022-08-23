@@ -5,6 +5,8 @@ import Button from "../button";
 import Input from "../input";
 import css from "./number-picker.module.css";
 
+type OnChange = (value: number) => void;
+
 type Props = {
   label?: string;
   className?: string;
@@ -12,19 +14,21 @@ type Props = {
   max?: number;
   value: number;
   disabled: boolean;
-  onChange: (value: number) => void;
+  onChange: OnChange;
   withInput?: boolean;
 };
 
-const subtract = (value: number, min: number, max: number, onChange) => () => {
-  changeValue(value, -1, min, max, onChange);
-};
+const subtract =
+  (value: number, min: number, max: number, onChange: OnChange) => () => {
+    changeValue(value, -1, min, max, onChange);
+  };
 
-const add = (value: number, min: number, max: number, onChange) => () => {
-  changeValue(value, 1, min, max, onChange);
-};
+const add =
+  (value: number, min: number, max: number, onChange: OnChange) => () => {
+    changeValue(value, 1, min, max, onChange);
+  };
 
-const update = (min: number, max: number, onChange) => (value) => {
+const update = (min: number, max: number, onChange: OnChange) => (value) => {
   changeValue(value, 0, min, max, onChange);
 };
 
@@ -33,7 +37,7 @@ const changeValue = (
   step: number,
   min: number,
   max: number,
-  onChange
+  onChange: OnChange
 ) => {
   const newValue = value + step;
   switch (true) {
@@ -79,6 +83,7 @@ const NumberPicker = ({
         <Button
           onClick={subtract(value, min, max, onChange)}
           disabled={isBelow(value, min, disabled)}
+          aria-label="Minus"
           compact
         >
           <Icons.Minus />
@@ -98,6 +103,7 @@ const NumberPicker = ({
         <Button
           onClick={add(value, min, max, onChange)}
           disabled={isAbove(value, max, disabled)}
+          aria-label="Plus"
           compact
         >
           <Icons.Plus />

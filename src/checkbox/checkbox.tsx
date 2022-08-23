@@ -6,6 +6,7 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   checked: boolean;
   disabled?: boolean;
+  appearance?: "checkbox" | "switch";
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onCheckedChange?: (value: boolean) => void;
 };
@@ -18,6 +19,7 @@ const Checkbox = ({
   checked,
   disabled,
   required,
+  appearance = "checkbox",
   ...props
 }: Props) => {
   const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +42,8 @@ const Checkbox = ({
         required={required}
         {...props}
       />
-      <span className={css.checkmark} />
+      {appearance === "checkbox" && <span className={css.checkmark} />}
+      {appearance === "switch" && <span className={css.switch} />}
       <div className={css.label}>{label}</div>
     </label>
   );

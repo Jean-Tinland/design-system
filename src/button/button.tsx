@@ -18,8 +18,10 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
       [css.iconOnly]: typeof children === "object",
     });
 
+    const Tag = tag;
+
     return (
-      <button
+      <Tag
         // @ts-ignore
         ref={ref}
         {...props}
@@ -27,9 +29,11 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
         tabIndex={tag === "a" ? 0 : undefined}
       >
         {children}
-      </button>
+      </Tag>
     );
   }
 );
+
+Button.displayName = "Button";
 
 export default Button;

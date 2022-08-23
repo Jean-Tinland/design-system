@@ -1,6 +1,7 @@
 .button {
   --padding: var(--ds-button-padding, 8px);
 
+  width: max-content;
   display: flex;
   align-items: center;
   justify-content: center;

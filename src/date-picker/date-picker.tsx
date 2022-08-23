@@ -171,4 +171,6 @@ const DatePicker = React.forwardRef(
   }
 );
 
+DatePicker.displayName = "DatePicker";
+
 export default DatePicker;
