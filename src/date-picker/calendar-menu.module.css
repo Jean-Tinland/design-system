@@ -32,7 +32,7 @@
 
 .control,
 .close {
-  color: var(--ds-grey-600, #2d303c);
+  color: var(--ds-grey-600, #383838);
   background-color: transparent;
 }
 
@@ -94,7 +94,7 @@
 
 .year,
 .month {
-  color: var(--ds-grey-600, #2d303c);
+  color: var(--ds-grey-600, #383838);
   background-color: transparent;
   transition: color 160ms
       var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1)),
@@ -111,7 +111,7 @@
 .yearSelected:not(:disabled):hover,
 .monthSelected,
 .monthSelected:not(:disabled):hover {
-  color: var(--ds-grey-000, #fff);
+  color: var(--ds-white, #fff);
   background-color: var(--ds-secondary, var(--ds-blue-400, #4177f6));
 }
 
@@ -124,8 +124,7 @@
 }
 
 .month {
-  text-transform: none;
-  font-weight: 400;
+  font-size: 12px;
 }
 
 .monthSelected {

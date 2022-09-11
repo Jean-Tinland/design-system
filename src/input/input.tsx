@@ -26,7 +26,7 @@ const Input = ({
   onValueChange,
   ...props
 }: Props) => {
-  const ref = React.useRef<HTMLInputElement>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const isDate = type === "date";

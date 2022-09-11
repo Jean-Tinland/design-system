@@ -36,14 +36,12 @@ const SnackbarProvider = ({ children }: Props): JSX.Element => {
   const [uniqueId, setUniqueId] = React.useState<number | undefined>();
   const [snackbar, setSnackbar] = React.useState<SnackbarProps | undefined>();
   const [closing, setClosing] = React.useState(false);
-  const [visibilityTimeout, setVisibilityTimeout] = React.useState<
-    Timeout | undefined
-  >();
+  const [visibilityTimeout, setVisibilityTimeout] =
+    React.useState<Timeout | undefined>();
   const [delayedVisibilityTimeout, setDelayedVisibilityTimeout] =
     React.useState<Timeout | undefined>();
-  const [closingTimeout, setClosingTimeout] = React.useState<
-    Timeout | undefined
-  >();
+  const [closingTimeout, setClosingTimeout] =
+    React.useState<Timeout | undefined>();
 
   const delay = snackbar?.delay || DEFAULT_DELAY;
 

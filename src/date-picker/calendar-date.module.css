@@ -3,6 +3,7 @@
   padding: 8px 6px;
   font-size: 14px;
   text-align: center;
+  color: var(--ds-grey-700, #232324);
   background-color: transparent;
   border: 0;
   border-radius: var(--ds-radius-100, 6px);
@@ -28,8 +29,7 @@
 }
 
 .dateSelected {
-  font-weight: 700;
-  color: #fff;
+  color: var(--ds-white, #fff);
   background-color: var(--ds-secondary, var(--ds-blue-400, #4177f6));
 }
 

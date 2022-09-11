@@ -4,7 +4,7 @@ import Button from "../button";
 import * as Icons from "../icons";
 import * as Utils from "./utils";
 import * as Data from "./data";
-import css from "./menu.module.css";
+import css from "./calendar-menu.module.css";
 
 const Menu = ({
   lang,
@@ -28,7 +28,7 @@ const Menu = ({
 
   const months = Data.SHORT_MONTHS[lang];
 
-  const updateSelected = (year) => {
+  const updateSelected = (year: number) => {
     setSelectedYear(year);
     setScrollBehavior("smooth");
   };
@@ -58,8 +58,8 @@ const Menu = ({
       );
       target?.scrollIntoView({
         behavior: scrollBehavior,
-        block: "center",
-        inline: "center",
+        block: "nearest",
+        inline: "start",
       });
     }
   }, [menuOpened, scrollBehavior, selectedYear]);

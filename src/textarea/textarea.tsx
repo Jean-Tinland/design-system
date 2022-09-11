@@ -25,7 +25,7 @@ const TextArea = ({
   autoSizing,
   ...props
 }: Props) => {
-  const innerRef = React.useRef<HTMLTextAreaElement | null>();
+  const innerRef = React.useRef<HTMLTextAreaElement>(null);
 
   const _onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChange?.(e);
@@ -75,7 +75,7 @@ const TextArea = ({
         <div
           // @ts-ignore
           ref={innerRef}
-          className={css.inner}
+          className={css.fieldWrapper}
         >
           <textarea
             {...props}

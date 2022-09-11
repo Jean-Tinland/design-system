@@ -9,11 +9,7 @@
   font-size: var(--ds-button-font-size, 14px);
   padding: var(--padding) calc(var(--padding) * 2);
   color: var(--ds-button-foreground, var(--ds-grey-000, #fff));
-  background-color: var(
-    --ds-button-background,
-    var(--ds-secondary, var(--ds-blue-400, #4177f6))
-  );
-  font-family: var(--ds-sans-serif-font, "Open Sans", inherit, sans-serif);
+  font-family: var(--ds-sans-serif-font, "Open Sans", sans-serif);
   text-transform: var(--ds-button-text-transform, uppercase);
   letter-spacing: var(--ds-button-letter-spacing, normal);
   line-height: var(--ds-button-line-height, 1);
@@ -26,11 +22,52 @@
     var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
-.button:not(:disabled):hover {
+.button:where(.primary) {
+  background-color: var(
+    --ds-button-background,
+    var(--ds-secondary, var(--ds-blue-400, #4177f6))
+  );
+}
+
+.button:where(.primary:not(:disabled)):hover {
   background-color: var(
     --ds-button-hover-background,
     var(--ds-primary, var(--ds-blue-500, #004cc2))
   );
+}
+
+.button:where(.secondary) {
+  color: var(--ds-black, #232324);
+  background-color: var(--ds-grey-300, #d4d4d4);
+}
+
+.button:where(.secondary:not(:disabled)):hover {
+  color: var(--ds-black, #232324);
+  background-color: var(--ds-grey-400, #bbbbbb);
+}
+
+.button:where(.success) {
+  background-color: var(--ds-green-400, #4bde97);
+}
+
+.button:where(.success:not(:disabled)):hover {
+  background-color: var(--ds-green-500, #4ab292);
+}
+
+.button:where(.warning) {
+  background-color: var(--ds-yellow-400, #ffb648);
+}
+
+.button:where(.warning:not(:disabled)):hover {
+  background-color: var(--ds-yellow-500, #e2a445);
+}
+
+.button:where(.danger) {
+  background-color: var(--ds-red-400, #f26464);
+}
+
+.button:where(.danger:not(:disabled)):hover {
+  background-color: var(--ds-red-500, #d55858);
 }
 
 .button:disabled {

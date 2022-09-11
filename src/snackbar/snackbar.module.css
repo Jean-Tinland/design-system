@@ -7,8 +7,8 @@
   display: flex;
   align-items: center;
   padding: 8px 20px;
-  color: var(--cms-grey-000, #ffffff);
-  background-color: var(--ds-grey-700, #171e30);
+  color: var(--ds-white, #fff);
+  background-color: var(--ds-black, #232324);
   border-radius: var(--ds-snackbar-radius, var(--ds-radius-200, 10px));
   box-shadow: var(
     --ds-snackbar-shadow,
@@ -109,7 +109,7 @@
 
 .text {
   color: currentColor;
-  font-family: var(--ds-sans-serif-font, "Open Sans", inherit, sans-serif);
+  font-family: var(--ds-sans-serif-font, "Open Sans", sans-serif);
   font-size: var(--ds-snackbar-font-size, 18px);
   font-weight: var(--ds-snackbar-font-weight, 700);
 }
@@ -127,7 +127,6 @@
   cursor: pointer;
   transition: background-color 160ms
     var(--ds-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));
-  z-index: 1;
 }
 
 .closeIcon {

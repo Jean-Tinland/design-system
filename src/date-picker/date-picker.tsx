@@ -1,12 +1,11 @@
 import * as React from "react";
 import classnames from "classnames";
-import DateItem from "./date-item";
-import Button from "../button";
-import * as Icons from "../icons";
+import CalendarHeader from "./calendar-header";
+import CalendarDate from "./calendar-date";
 import * as Data from "./data";
 import * as Utils from "./utils";
 import css from "./date-picker.module.css";
-import Menu from "./menu";
+import CalendarMenu from "./calendar-menu";
 
 type Props = {
   lang?: string;
@@ -37,6 +36,7 @@ const DatePicker = React.forwardRef(
       lang || (typeof navigator !== "undefined" && navigator.language) === "fr"
         ? "fr"
         : "en";
+
     const now = new Date();
     const date = value && new Date(value as string);
     const dateMonth = date && date.getMonth() + 1;
@@ -78,7 +78,7 @@ const DatePicker = React.forwardRef(
     const days = Object.keys(i18nWeekDays);
     const calendarDates = Data.calendar(month, year);
 
-    const gotoPreviousMonth = () => {
+    const goToPreviousMonth = () => {
       const { month: newMonth, year: newYear } = Utils.getPreviousMonth(
         month,
         year
@@ -87,7 +87,7 @@ const DatePicker = React.forwardRef(
       setYear(newYear);
     };
 
-    const gotoNextMonth = () => {
+    const goToNextMonth = () => {
       const { month: newMonth, year: newYear } = Utils.getNextMonth(
         month,
         year
@@ -109,29 +109,16 @@ const DatePicker = React.forwardRef(
         className={classes}
       >
         <div className={css.inner}>
-          <div className={css.header}>
-            <Button
-              className={css.control}
-              onClick={gotoPreviousMonth}
-              disabled={!!pastMonthDisabled}
-            >
-              <Icons.ChevronLeft />
-            </Button>
-            <Button
-              className={css.title}
-              onClick={toggleMenu}
-              disabled={!!yearSelectLocked}
-            >
-              {monthName} {year} <Icons.ChevronDown />
-            </Button>
-            <Button
-              className={css.control}
-              onClick={gotoNextMonth}
-              disabled={!!futureMonthDisabled}
-            >
-              <Icons.ChevronRight />
-            </Button>
-          </div>
+          <CalendarHeader
+            goToPreviousMonth={goToPreviousMonth}
+            goToNextMonth={goToNextMonth}
+            toggleMenu={toggleMenu}
+            monthName={monthName}
+            year={year}
+            pastMonthDisabled={pastMonthDisabled}
+            futureMonthDisabled={futureMonthDisabled}
+            yearSelectLocked={yearSelectLocked}
+          />
           <div className={css.days}>
             {days.map((day, i) => (
               <div key={`${day}-${i}`} className={css.day}>
@@ -140,8 +127,8 @@ const DatePicker = React.forwardRef(
             ))}
           </div>
           <div className={css.dates}>
-            {calendarDates.map((date, i) => (
-              <DateItem
+            {calendarDates.map((date: string, i: number) => (
+              <CalendarDate
                 key={i}
                 date={date}
                 month={month}
@@ -153,7 +140,7 @@ const DatePicker = React.forwardRef(
               />
             ))}
           </div>
-          <Menu
+          <CalendarMenu
             lang={locale}
             menuOpened={menuOpened}
             toggleMenu={toggleMenu}

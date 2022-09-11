@@ -3,7 +3,7 @@
   padding: var(--ds-tooltip-padding, 6px 10px);
   font-size: var(--ds-tooltip-font-size, 13px);
   line-height: 1;
-  font-family: var(--ds-sans-serif-font, "Open Sans", inherit, sans-serif);
+  font-family: var(--ds-sans-serif-font, "Open Sans", sans-serif);
   color: var(--ds-tooltip-foreground, var(--ds-grey-000, #fff));
   background-color: var(--ds-tooltip-background, var(--ds-grey-500, #484848));
   white-space: var(--ds-tooltip-white-space, nowrap);

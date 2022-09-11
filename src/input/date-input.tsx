@@ -1,12 +1,12 @@
 import * as React from "react";
 import DatePicker from "../date-picker";
 import css from "./input.module.css";
-import DateInputWrapper from "./date-input-wrapper";
 import Input from "./input";
+import Dropdown from "../dropdown";
 import * as Utils from "./utils";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
-  fieldRef: React.RefObject<HTMLInputElement>;
+  fieldRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -24,7 +24,7 @@ const DateInput = ({
   onValueChange,
   ...props
 }: Props) => {
-  const datePickerRef = React.useRef<HTMLElement>(null);
+  const dropdownRef = React.useRef<HTMLElement>(null);
   const [datePickerVisible, setDatePickerVisible] = React.useState(false);
 
   const dateValue = value && value !== "undefined" && new Date(value as string);
@@ -32,6 +32,7 @@ const DateInput = ({
   const _onChange = (value: string) => {
     if (inputRef.current) {
       Utils.triggerInputChange(inputRef.current, value);
+      setDatePickerVisible(false);
     }
   };
 
@@ -41,7 +42,7 @@ const DateInput = ({
         const target = e.target as Element;
         if (
           fieldRef.current?.contains(target) ||
-          datePickerRef.current?.contains(target)
+          dropdownRef.current?.contains(target)
         ) {
           return;
         }
@@ -85,16 +86,23 @@ const DateInput = ({
         onChange={undefined}
       />
       {datePickerVisible && (
-        <DateInputWrapper fieldRef={fieldRef}>
+        <Dropdown
+          ref={dropdownRef}
+          anchorRef={fieldRef}
+          className={css.dateDropdown}
+          innerClassName={css.dateDropdownInner}
+          minWidth="auto"
+          maxHeight="none"
+          onClose={setDatePickerVisible}
+        >
           <DatePicker
-            ref={datePickerRef}
             className={css.datePicker}
             min={min}
             max={max}
             value={value}
             onChange={_onChange}
           />
-        </DateInputWrapper>
+        </Dropdown>
       )}
     </>
   );

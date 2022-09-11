@@ -94,6 +94,7 @@ const NumberPicker = ({
             value={value}
             onValueChange={update(min, max, onChange)}
             className={css.value}
+            disabled={disabled}
             compact
             size={inputSize}
           />

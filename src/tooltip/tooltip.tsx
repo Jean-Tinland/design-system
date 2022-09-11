@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Tooltip = ({ anchor, children }: Props): React.ReactPortal | null => {
-  const ref = React.useRef<HTMLElement | null>();
+  const ref = React.useRef<HTMLElement>(null);
   const [anchorBounds, setAnchorBounds] = React.useState<DOMRect | undefined>();
   const [styles, setStyles] = React.useState({});
 

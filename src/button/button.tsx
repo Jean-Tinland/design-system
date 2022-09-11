@@ -7,13 +7,24 @@ type Props = (
   | React.AnchorHTMLAttributes<HTMLAnchorElement>
 ) & {
   tag?: "button" | "a";
+  variant?: "primary" | "secondary" | "success" | "warning" | "danger";
   compact?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
-  ({ tag = "button", className, compact, children, ...props }, ref) => {
-    const classes = classnames(css.button, className, {
+  (
+    {
+      tag = "button",
+      variant = "primary",
+      className,
+      compact,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const classes = classnames(css.button, className, css[variant], {
       [css.compact]: compact,
       [css.iconOnly]: typeof children === "object",
     });

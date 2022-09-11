@@ -139,5 +139,6 @@ export const calendar = (month = THIS_MONTH, year = THIS_YEAR) => {
     const day = i + 1;
     return [nextMonthYear, Utils.zeroPad(nextMonth, 2), Utils.zeroPad(day, 2)];
   });
+
   return [...prevMonthDates, ...thisMonthDates, ...nextMonthDates];
 };

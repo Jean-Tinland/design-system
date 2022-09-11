@@ -1,6 +1,7 @@
 import * as React from "react";
 import classnames from "classnames";
 import Checkbox from "../checkbox";
+import Dropdown from "../dropdown";
 import * as Icons from "../icons";
 import css from "./multiple-select.module.css";
 import cssInput from "../input/input.module.css";
@@ -71,13 +72,18 @@ const MultipleSelect = ({
   ...props
 }: Props) => {
   const ref = React.useRef<HTMLElement>(null);
+  const dropdownRef = React.useRef<HTMLElement>(null);
   const [opened, setOpened] = React.useState(defaultOpened);
   const isValid = valid && !error;
 
   const closeOnOutsideClick: EventListener = React.useCallback(
     (e) => {
       const target = e.target as Element;
-      if (ref.current?.contains(target)) return;
+      if (
+        ref.current?.contains(target) ||
+        dropdownRef.current?.contains(target)
+      )
+        return;
       setOpened(false);
     },
     [setOpened]
@@ -102,6 +108,17 @@ const MultipleSelect = ({
       const isString = typeof value === "string";
       if (isString) return value;
       return value.label;
+    })
+    .sort((a, b) => {
+      const indexOfA = options.findIndex((option) => {
+        const isString = typeof option === "string";
+        return isString ? a === option : a === option.label;
+      });
+      const indexOfB = options.findIndex((option) => {
+        const isString = typeof option === "string";
+        return isString ? b === option : b === option.label;
+      });
+      return indexOfA - indexOfB;
     })
     .join(", ");
 
@@ -152,8 +169,19 @@ const MultipleSelect = ({
           />
         </div>
       </label>
-      <div className={css.dropdown}>
-        <div role="listbox" className={css.dropdownInner}>
+      {error && (
+        <div className={cssInput.errorMessage} role="alert">
+          <Icons.XCircle className={cssInput.errorIndicator} />
+          {error}
+        </div>
+      )}
+      {opened && (
+        <Dropdown
+          ref={dropdownRef}
+          anchorRef={ref}
+          innerClassName={css.dropdownInner}
+          onClose={setOpened}
+        >
           {options.map((option) => {
             const isString = typeof option === "string";
             const label = isString ? option : option.label;
@@ -182,13 +210,7 @@ const MultipleSelect = ({
               </div>
             );
           })}
-        </div>
-      </div>
-      {error && (
-        <div className={cssInput.errorMessage} role="alert">
-          <Icons.XCircle className={cssInput.errorIndicator} />
-          {error}
-        </div>
+        </Dropdown>
       )}
     </div>
   );

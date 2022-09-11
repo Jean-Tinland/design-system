@@ -6,6 +6,7 @@
 }
 
 .label {
+  color: var(--ds-input-foreground, var(--ds-grey-700, #232324));
   font-size: var(--ds-label-font-size, 12px);
   text-transform: uppercase;
   user-select: none;
@@ -16,7 +17,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  z-index: 0;
 }
 
 .withInput .inner {
@@ -29,7 +29,6 @@
 
 .withInput .inner button {
   position: relative;
-  z-index: 1;
 }
 
 .withInput .inner button:first-of-type {
@@ -45,19 +44,17 @@
 }
 
 .value {
+  position: static;
   min-width: 18px;
+  color: var(--ds-number-picker-foreground, var(--ds-grey-600, #383838));
   font-size: var(--ds-number-picker-font-size, 14px);
   text-transform: uppercase;
   text-align: center;
   user-select: none;
 }
 
-.picker.active .value {
-  position: relative;
-  color: var(--ds-number-picker-foreground, var(--ds-grey-600, #2d303c));
+.picker.active .value input {
   font-weight: 700;
-  text-align: center;
-  z-index: 0;
 }
 
 .picker.disabled .value {

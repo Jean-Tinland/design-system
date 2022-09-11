@@ -4,12 +4,20 @@
 .label {
   display: flex;
   flex-direction: column;
-  font-family: var(--ds-sans-serif-font, "Open Sans", inherit, sans-serif);
+  font-family: var(--ds-sans-serif-font, "Open Sans", sans-serif);
   gap: 5px;
+}
+
+.select {
+  --chevron-size: 8px;
 }
 
 .withIcon {
   --icon-size: 16px;
+}
+
+.compact.withIcon {
+  --icon-size: 14px;
 }
 
 .hidden {
@@ -18,6 +26,12 @@
 
 .date .label {
   position: relative;
+}
+
+.dateDropdown .datePicker {
+  margin: 0 auto;
+  padding: 0 0 0 4px;
+  box-shadow: none;
 }
 
 .labelText {
@@ -37,6 +51,7 @@
 
 .fieldWrapper {
   position: relative;
+  color: var(--ds-input-foreground, var(--ds-grey-700, #232324));
 }
 
 .fieldWrapper > svg {
@@ -48,11 +63,15 @@
   fill: currentColor;
 }
 
+.compact .fieldWrapper > svg {
+  left: var(--ds-input-compact-padding, 5px);
+}
+
 .field {
   width: 100%;
   padding: var(--ds-input-padding, 8px);
   box-sizing: border-box;
-  color: var(--ds-input-foreground, var(--ds-grey-700, #171e30));
+  color: inherit;
   font-size: var(--ds-input-font-size, 16px);
   font-family: var(--ds-sans-serif-font);
   background-color: var(--ds-input-background, var(--ds-grey-100, #f5f5f5));
@@ -83,18 +102,22 @@
 }
 
 .select .field {
-  padding: var(--ds-input-padding, 8px)
-    calc(24px + var(--ds-input-padding, 8px)) var(--ds-input-padding, 8px)
-    var(--ds-input-padding, 8px);
+  padding-right: calc(var(--chevron-size) + var(--ds-input-padding, 8px) * 3);
   appearance: none;
-  background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'%3E%3C/path%3E%3C/svg%3E");
-  background-position: calc(100% - 10px) 50%;
-  background-repeat: no-repeat;
-  background-size: 18px;
 }
 
-.withIcon .field {
-  padding-left: calc(var(--icon-size) + var(--ds-input-padding, 8px) * 2);
+.select .fieldWrapper::after {
+  position: absolute;
+  content: "";
+  width: var(--chevron-size);
+  height: var(--chevron-size);
+  display: inline-block;
+  right: calc(var(--ds-input-padding, 8px) * 2);
+  top: calc(50% - var(--chevron-size) / 1.5);
+  border-color: currentColor;
+  border-style: solid;
+  border-width: 1px 1px 0 0;
+  transform: rotate(135deg);
 }
 
 .textarea:not(.autoSizing) .field {
@@ -112,9 +135,7 @@
 }
 
 .select.compact .field {
-  padding: var(--ds-input-compact-padding, 5px)
-    calc(24px + var(--ds-input-compact-padding, 8px))
-    var(--ds-input-compact-padding, 5px) var(--ds-input-compact-padding, 5px);
+  padding: var(--ds-input-compact-padding, 5px);
 }
 
 .input.compact .field,
@@ -122,18 +143,21 @@
   padding: var(--ds-input-compact-padding, 5px);
 }
 
+.withIcon .field {
+  padding-left: calc(var(--icon-size) + var(--ds-input-padding, 8px) * 2);
+}
+
+.compact.withIcon .field {
+  padding-left: calc(
+    var(--icon-size) + var(--ds-input-compact-padding, 5px) * 2
+  );
+}
+
 .dateField,
 .dateField:read-only {
   text-align: left;
   cursor: pointer;
   user-select: none;
-}
-
-.datePicker {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  z-index: 1;
 }
 
 .calendarIcon {
