@@ -127,7 +127,7 @@ const DatePicker = React.forwardRef(
             ))}
           </div>
           <div className={css.dates}>
-            {calendarDates.map((date: string, i: number) => (
+            {calendarDates.map((date, i) => (
               <CalendarDate
                 key={i}
                 date={date}
